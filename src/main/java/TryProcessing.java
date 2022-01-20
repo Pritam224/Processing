@@ -4,22 +4,37 @@ import processing.core.PApplet;
 public class TryProcessing extends PApplet {
 
 
+
+
+
+
+
+
+
+    class Balls {
+
+        int speed, pos, heightFactor;
+        Balls(int speed, int pos, int heightFactor) {
+            this.speed = speed;
+            this.pos = pos;
+            this.heightFactor = heightFactor;
+        }
+
+        void createEllipse()
+        {
+            ellipse(pos, (heightFactor*HEIGHT)/5, DIAMETER, DIAMETER);
+            pos += speed;
+        }
+    }
+
     public static final int WIDTH = 600;
     public static final int HEIGHT = 500;
     public static final int DIAMETER = 10;
-
-    int firstCirclePos = 0;
-    int secondCirclePos = 0;
-    int thirdCirclePos = 0;
-    int fourthCirclePos = 0;
+    Balls balls[] = new Balls[4];
 
 
 
 
-
-    public static void main(String[] args) {
-        PApplet.main("TryProcessing", args);
-    }
 
     @Override
     public void settings() {
@@ -31,7 +46,10 @@ public class TryProcessing extends PApplet {
     @Override
     public void setup() {
         //super.setup();
-        //ellipse(WIDTH/2, HEIGHT/2, DIAMETER, DIAMETER);
+        for(int i = 0; i<4; i++)
+        {
+            balls[i] = new Balls(i+1, 0, i+1);
+        }
     }
 
 
@@ -39,17 +57,17 @@ public class TryProcessing extends PApplet {
     public void draw () {
         //super.draw();
 
-        ellipse(firstCirclePos, (HEIGHT) / 5, DIAMETER, DIAMETER);
-        firstCirclePos += 1;
+        for(int i = 0; i<4; i++)
+        {
+            balls[i].createEllipse();
+        }
 
-        ellipse(secondCirclePos, (2*HEIGHT) / 5, DIAMETER, DIAMETER);
-        secondCirclePos += 2;
+    }
 
-        ellipse(thirdCirclePos, (3*HEIGHT) / 5, DIAMETER, DIAMETER);
-        thirdCirclePos += 3;
 
-        ellipse(fourthCirclePos, (4*HEIGHT) / 5, DIAMETER, DIAMETER);
-        fourthCirclePos += 4;
+    public static void main(String[] args) {
+        PApplet.main("TryProcessing", args);
+
 
     }
 
